@@ -10,6 +10,9 @@
   align-items: center;
 }
 
+.a-around{
+  align-content: space-around
+}
 .j-end {
   justify-content: end;
 }
@@ -20,6 +23,9 @@
 
 .space-btw {
   justify-content: space-between;
+}
+.j-center {
+  justify-content: center;
 }
 
 .f-column {

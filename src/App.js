@@ -17,6 +17,10 @@ import UserProfilePage from './pages/UserProfilePage';
 import IndexPage from './pages/IndexPage';
 import RegisterPage from './pages/RegisterPage';
 
+import SliderPage from './pages/SliderPage';
+import SwipePage from './pages/SwipePage';
+import LikesPage from './pages/LikesPage';
+
 
 const socket = io.connect('http://localhost:4001');
 
@@ -35,21 +39,22 @@ function App() {
     // const [singleAuction, setSingleAuction] = useState({})
     // const [tick, setTick] = useState(false)
     // const [showOpen, setShowOpen] = useState(true);
-    // const [showClosed, setShowClosed] = useState(true);
     // used in forum 
+    const [nobodyAvailable, setNobodyAvailable] = useState(false);
     const [sessionUser, setSessionUser] = useState({})
     const [userImages, setuserImages] = useState([])
     const [imgI, setImgI] = useState(0)
     const [userImage, setuserImage] = useState("https://t4.ftcdn.net/jpg/03/59/58/91/360_F_359589186_JDLl8dIWoBNf1iqEkHxhUeeOulx0wOC5.jpg")
+    const [filter, setFilter] = useState({})
+    const [list, setList,] = useState([])
 
-    // const [topic, setTopic] = useState('')
-    // const [discussions, setDiscussions] = useState([])
+    const [listIndex, setListIndex] = useState(0)
     // const [discussion, setDiscussion] = useState({})
     // const [discussionId, setDiscussionId] = useState('')
     // const [comments, setComments] = useState([])
     // const [replyComment, setReplyComment] = useState('')
     // const [users, setUsers] = useState([])
-    // const [onlineUsers, setOnlineUsers,] = useState([])
+    const [onlineUsers, setOnlineUsers,] = useState([])
     // const [sender, setSender] = useState('')
     // const [reciever, setReciever] = useState('')
 
@@ -65,7 +70,7 @@ function App() {
         // showAuction, setShowAuction,
         // id, setId,
         // singleAuction, setSingleAuction,
-        // socket,
+        socket,
         // showOpen, setShowOpen,
         // showClosed, setShowClosed,
         // used in forum 
@@ -76,6 +81,10 @@ function App() {
         imgI, setImgI,
         sex, SetSex,
         verifyResult, setVerifyResult,
+        filter, setFilter,
+        list, setList,
+        listIndex, setListIndex,
+        nobodyAvailable, setNobodyAvailable,
 
 
         // topic, setTopic,
@@ -85,7 +94,7 @@ function App() {
         // comments, setComments,
         // replyComment, setReplyComment,
         // users, setUsers,
-        // onlineUsers, setOnlineUsers,
+        onlineUsers, setOnlineUsers,
         // sender, setSender,
         // reciever, setReciever
     }
@@ -94,9 +103,16 @@ function App() {
 
 
         socket.on('log', (data) => {
-            // setOnlineUsers(data)
-            console.log('login socket', data)
+            setOnlineUsers(data)
+            console.log('log socket', data)
         })
+
+        socket.on('like', (data) => {
+            setOnlineUsers(data)
+            prompt('You have got like from ', data)
+            // console.log('log socket', data)
+        })
+
 
 
     }, [])
@@ -122,7 +138,9 @@ function App() {
 
                         <Route path="/" element={<IndexPage />} />
 
-                        {/* <Route path="/topic" element={<TopicPage />} /> */}
+                        {/* <Route path="/slider" element={<SliderPage />} /> */}
+
+                        <Route path="/swipe" element={<SwipePage />} />
 
                         {/* <Route path="/discussion" element={<DiscussionPage />} /> */}
 
@@ -130,7 +148,7 @@ function App() {
 
                         <Route path="/profile" element={<UserProfilePage />} />
 
-                        {/* <Route path="/leaders" element={<LeaderboardPage />} /> */}
+                        <Route path="/likes" element={<LikesPage />} />
 
                         {/* <Route path="/message" element={<MessagePage />} /> */}
 

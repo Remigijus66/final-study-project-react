@@ -1,3 +1,4 @@
+import { setMaxListeners } from 'events';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MainContext from "../context/MainContext";
@@ -18,7 +19,7 @@ const Profile = () => {
   // const ageRef = useRef()
   // const hairRef = useRef()
   const nav = useNavigate()
-  const { sessionUser, userImages, userImage, setuserImages, setSessionUser, imgI, setImgI } = useContext(MainContext)
+  const { sessionUser, userImages, userImage, setuserImages, setSessionUser, filter, imgI, setImgI, setList, setListIndex, setNobodyAvailable } = useContext(MainContext)
 
 
   const updateProfile = async () => {
@@ -36,6 +37,27 @@ const Profile = () => {
     imageRef.current.value = ''
 
   }
+  const getList = async () => {
+    setListIndex(0)
+    const data = {
+      sex: filter.sex,
+      city: filter.city,
+      minAge: filter.minAge,
+      maxAge: filter.maxAge,
+      name: sessionUser.name,
+    }
+    // console.log(data)
+    const res = await post('getList', data)
+    console.log('getList res', res.data)
+    setList(res.data)
+    if (res.data.length > 0) {
+      setNobodyAvailable(false)
+    } else {
+      setNobodyAvailable(true)
+    }
+    nav('/swipe')
+  }
+
 
   const changeImage = () => {
     console.log(userImages.length)
@@ -49,7 +71,7 @@ const Profile = () => {
   return (
     <div>
 
-      <button style={{ width: '530px' }} onClick={() => nav('/')}>Back</button>
+      <button style={{ width: '630px' }} onClick={() => nav('/')}>Back</button>
       <div className=' d-flex f-wrap  a-center'>
 
         <div className='profile-card d-flex f-wrap f-column a-center ' >
@@ -60,7 +82,7 @@ const Profile = () => {
           </div>
           <button onClick={changeImage}> {'<-->'} </button>
 
-          {userImages.length > 1 && <button className='large' >Find friends</button>}
+          {userImages.length > 1 && <button onClick={getList} className='large' >Find friends</button>}
 
 
         </div>

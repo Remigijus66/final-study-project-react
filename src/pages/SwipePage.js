@@ -1,21 +1,23 @@
 import React from 'react';
+import Card from '../components/Card';
 import Nav from '../components/Navigate';
 import Profile from '../components/Profile';
+import Swipe from '../components/swipe';
 
 
 
 
-const UserProfilePage = () => {
+const SwipePage = () => {
   return (
     <div className="p50">
       <Nav />
-      <Profile />
-      {/* <h2> User Profile Page</h2> */}
-      {/* <Login /> */}
+      <Swipe />
+      {/* <Card /> */}
+
     </div>
   );
 };
 
-export default UserProfilePage;
+export default SwipePage;
 
 

@@ -30,6 +30,7 @@ const Login = () => {
         console.log(res)
         if (res.error === true) setError(res.message)
         if (res.error === false) {
+          socket.emit('login', res.data.name)
           setSessionUser(res.data)
           setuserImages(res.data.images)
           if (res.data.images.length > 0) setuserImage(res.data.images[0])
@@ -63,6 +64,7 @@ const Login = () => {
     const res = await post('login', data)
     console.log(res)
     if (res.error === false) {
+      socket.emit('login', res.data.name)
       localStorage.setItem('secret', res.data.secret)
       setSessionUser(res.data)
       setuserImages(res.data.images)
@@ -81,7 +83,7 @@ const Login = () => {
 
   }
 
-  const logoutUser = async () => {
+  const logoutUser = () => {
     localStorage.setItem('keepMeLogged', false)
     localStorage.setItem('token', '')
 

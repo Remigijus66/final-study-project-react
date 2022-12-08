@@ -24,6 +24,7 @@ const Nav = () => {
 
       setuserImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFUUgRMfIreBNH7C7UXCnE7Uk_vm_PR0jEgaAQxCGbNBD0rojxzh6QggsPF9Jk9v_ozYM&usqp=CAU")
     }
+    socket.emit('logout', sessionUser.name)
     // socket.emit('logout', sessionUser.name)
     nav('/login')
 
@@ -34,6 +35,7 @@ const Nav = () => {
 
       <div className='navline d-flex a-center' >
         <div className='grow1'>
+          <button onClick={() => { nav('/likes') }}> My likes</button>
 
           {/* <button >Auctions list</button>
           <button >Upload new auction </button> */}
@@ -41,7 +43,7 @@ const Nav = () => {
         </div>
 
         <div className='d-flex f-wrap a-center' >
-          <h4>{sessionUser.name}</h4>
+          <h4 style={{ margin: '7px' }}>{sessionUser.name}</h4>
           <div className='avatar' style={{ backgroundImage: `url("${userImage}")` }}></div>
           {/* <img className='avatar' style={{ backgroundImage: `url("${userImage}")` }} src={'userImage'} alt="" /> */}
           {sessionUser.name && <div style={{
