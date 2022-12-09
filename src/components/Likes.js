@@ -1,58 +1,42 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
 import MainContext from "../context/MainContext";
 
-import { post, } from "../plugins/http";
-import Card from './Card';
-import Filters from './Filters';
+import LikesCard from './LikesCard';
 
 const Likes = () => {
 
+  const { sessionUser, onesWholikedMe,
+    onesWhoILiked, likedMe, iLiked } = useContext(MainContext)
 
-  const [showFilters, setShowFilters] = useState(false)
-  const imageRef = useRef()
+  useEffect(
+    () => {
+      likedMe(sessionUser.name)
+      iLiked()
 
-  const nav = useNavigate()
-  const { sessionUser, userImages, userImage, setuserImages, setSessionUser, imgI, setImgI, list, listIndex, nobodyAvailable } = useContext(MainContext)
+    }, []
+  )
 
-  // useEffect(
-  //   () => {
-  //     likedMe()
-  //   }, []
-  // )
 
-  const likedMe = async () => {
-    const data = {
-      name: sessionUser.name
-    }
-    const res = await post('likedMe', data)
-    console.log(res)
-  }
-  const iLiked = async () => {
-    const data = {
-      name: sessionUser.name
-    }
-    const res = await post('iLiked', data)
-    console.log(res)
-  }
 
 
   return (
-    <div>
-      <h2>Likes</h2>
-      <button onClick={likedMe}>Liked Me</button>
-      <button onClick={iLiked}> I liked </button>
-      {/* {!showFilters && <button onClick={() => { setShowFilters(true) }}>Show filters</button>}
-      {showFilters && <button onClick={() => { setShowFilters(false) }}>Hide filters</button>}
-      <button onClick={() => nav('/likes')}>Show my likes</button>
+    <div className='d-flex '>
+      <div className='grow1'>
+        {/* <button onClick={likedMe}>Liked Me</button> */}
+        <h3 style={{ marginLeft: '20px' }}>The ones who liked me</h3>
+        <div className='d-flex f-wrap'>
+          {onesWholikedMe.map((x, i) => <div key={i} ><LikesCard images={x.person[0].images} age={x.person[0].age} city={x.person[0].city} name={x.person[0].name} /></div>)}
+        </div  >
+      </div>
+      <div className='dash'></div>
+      <div className='grow1'>
+        {/* <button onClick={iLiked}> I liked </button> */}
+        <h3 style={{ marginLeft: '20px' }}>The ones I liked</h3>
+        <div className='d-flex f-wrap' >
+          {onesWhoILiked.map((x, i) => <div key={i} ><LikesCard images={x.person[0].images} age={x.person[0].age} city={x.person[0].city} name={x.person[0].name} /></div>)}
+        </div>
+      </div>
 
-      <div className=' d-flex f-wrap  a-center j-center'>
-        {!nobodyAvailable && <Card images={list[listIndex].images} age={list[listIndex].age} city={list[listIndex].city} name={list[listIndex].name} id={list[listIndex]._id} />}
-        {nobodyAvailable && <div className='profile-card d-flex f-wrap f-column a-center j-center'> <h3> oops... nobody is in the list. </h3></div>}
-
-        {showFilters && <Filters />} */}
-
-      {/* </div> */}
     </div>
   );
 };

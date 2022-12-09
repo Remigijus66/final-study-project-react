@@ -11,10 +11,8 @@ import Register from '../components/Register';
 const LikesPage = () => {
   return (
     <div className="p50">
-
       <Nav />
       <Likes />
-
     </div>
   );
 };

@@ -1,75 +1,22 @@
-import React, { useContext, useState, useRef } from 'react';
-
-import ReactDOM from 'react-dom';
+import React, { useContext, useRef } from 'react';
 import MainContext from "../context/MainContext";
 import { useNavigate } from "react-router-dom";
-import { post } from "../plugins/http";
+
 import SexRadio from './Radio';
 import "react-widgets/styles.css";
 import DropdownList from "react-widgets/DropdownList"
-import InputRange from 'react-input-range';
+
 
 const Filters = () => {
-  const nav = useNavigate()
 
-  // const [errorMessage, setErrorMessage] = useState('')
-  // const [successMessage, setSuccessMessage] = useState('')
+  const { city, setCity, sex, filter, setFilter } = useContext(MainContext)
 
-  const { setSessionUser, setuserImage, socket, sessionUser, verifyResult, setVerifyResult, city, setCity, sex, SetSex, filter, setFilter } = useContext(MainContext)
-
-
-
-  // const registerNameRef = useRef()
-  // const passOneRef = useRef()
-  // const passTwoRef = useRef()
   const minAgeRef = useRef()
   const maxAgeRef = useRef()
-
 
   const cities = ['Vilnius', 'Kaunas', 'Klaipėda', 'Šiauliai', 'Panevėžys', 'Alytus', 'Marijampolė', 'Mažeikiai', 'Jonava', 'Utena', 'Kėdainiai', 'Tauragė', 'Telšiai', 'Ukmergė'
   ]
 
-
-  // const registerUser = async () => {
-  //   setErrorMessage('')
-  //   // setSuccessMessage('')
-  //   console.log(registerNameRef.current.value)
-  //   console.log(passOneRef.current.value)
-  //   console.log(passTwoRef.current.value)
-  //   console.log(ageRef.current.value)
-  //   const data = {
-  //     name: registerNameRef.current.value,
-  //     passOne: passOneRef.current.value,
-  //     passTwo: passTwoRef.current.value,
-  //     sex: sex,
-  //     age: ageRef.current.value,
-  //     city: city
-  //   }
-  //   const res = await post('register', data)
-  //   console.log('res', res)
-  //   setVerifyResult('')
-  //   if (res.error === true) setErrorMessage(res.message)
-  //   if (res.data === "badPass" || res.data === 'badName' || 'badSex' || 'badAge' || 'badCity')
-  //     setVerifyResult(res.data);
-  //   if (res.error === false) {
-
-
-  //     setSessionUser(res.data)
-  //     registerNameRef.current.value = ''
-  //     passOneRef.current.value = ''
-  //     passTwoRef.current.value = ''
-  //     ageRef.current.value = ''
-  //     setCity('City')
-  //     SetSex('')
-  //     setSuccessMessage('Registration succesfull')
-  //     setTimeout(() => {
-  //       nav('/login')
-  //       clearTimeout();
-  //     }, 2000)
-  //     // setSuccessMessage('')
-  //   }
-
-  // }
 
   const setFilterValue = () => {
     const filtervalue = {
@@ -90,8 +37,6 @@ const Filters = () => {
     <div className='d-flex f-column a-center' >
 
       <h5>Looking for:</h5>
-
-
 
       <div className='filterbox'>
 
@@ -114,7 +59,7 @@ const Filters = () => {
 
 
         </div>
-        <button onClick={setFilterValue}>Set filters </button></div>
+        <button style={{ width: '95%' }} onClick={setFilterValue}>Set filters </button></div>
 
 
     </div>

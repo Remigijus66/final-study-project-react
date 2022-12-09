@@ -48,6 +48,7 @@ const Profile = () => {
     }
     // console.log(data)
     const res = await post('getList', data)
+    if (res.error === true) return nav('/')
     console.log('getList res', res.data)
     setList(res.data)
     if (res.data.length > 0) {
@@ -71,7 +72,7 @@ const Profile = () => {
   return (
     <div>
 
-      <button style={{ width: '630px' }} onClick={() => nav('/')}>Back</button>
+
       <div className=' d-flex f-wrap  a-center'>
 
         <div className='profile-card d-flex f-wrap f-column a-center ' >
@@ -103,6 +104,5 @@ const Profile = () => {
   );
 };
 
-// default: "https://t4.ftcdn.net/jpg/03/59/58/91/360_F_359589186_JDLl8dIWoBNf1iqEkHxhUeeOulx0wOC5.jpg"
 
 export default Profile;

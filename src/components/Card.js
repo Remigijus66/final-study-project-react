@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import MainContext from "../context/MainContext";
 import { post } from '../plugins/http';
 
 const Card = ({ name, age, city, images, id }) => {
 
-
+  const nav = useNavigate()
   const { socket, sessionUser, userImage, imgI, setImgI, list, listIndex, setListIndex, setNobodyAvailable } = useContext(MainContext)
 
 
@@ -35,8 +35,14 @@ const Card = ({ name, age, city, images, id }) => {
     }
     const res = await post('addLike', data)
     console.log(res)
+    if (res.error === true) return nav('/')
     if (res.error === false) {
-      socket.emit('like', name)
+      const socketData = {
+        from: sessionUser.name,
+        to: name
+      }
+      socket.emit('like', socketData)
+      console.log('socket emitted', socketData)
       next()
     }
   }
@@ -45,17 +51,12 @@ const Card = ({ name, age, city, images, id }) => {
     next()
     console.log(list)
   }
-  const sendSocket = () => {
-    const data = { from: sessionUser.name, to: 'jo' }
-    socket.emit('like', data)
-    // prompt('kuku')
-  }
+
   return (
 
 
     <div className='profile-card d-flex f-wrap f-column a-center j-center' >
       <h5>{name}</h5>
-      <button onClick={sendSocket}>send socket</button>
       <div className='image-container d-flex f-wrap f-end' style={{ backgroundImage: `url("${images.length === 0 ? userImage : images[imgI]}")` }}>
         <h3 style={{ color: 'white' }}>{name} {age}, from {city}</h3>
 
@@ -63,7 +64,7 @@ const Card = ({ name, age, city, images, id }) => {
       <button onClick={changeImage}> {'<-->'} </button>
 
       <div >
-        <button onClick={dislike} style={{ width: '100px', margin: '20px' }}> Dislike </button>
+        <button onClick={dislike} style={{ width: '100px', margin: '20px' }}> Next </button>
         <button onClick={like} style={{ width: '100px', margin: '20px' }}> Like</button>
       </div>
     </div>
@@ -75,9 +76,7 @@ const Card = ({ name, age, city, images, id }) => {
 
 
 export default Card;
-//const MainGrid = ({cells, selected, setSelected}) => {
 
-//
 
 
 
