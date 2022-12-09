@@ -2,7 +2,7 @@ import './App.css';
 import io from "socket.io-client"
 import { useEffect, useState } from "react";
 import MainContext from "./context/MainContext";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from './pages/LoginPage';
 import UserProfilePage from './pages/UserProfilePage';
 import IndexPage from './pages/IndexPage';

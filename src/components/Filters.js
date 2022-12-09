@@ -1,6 +1,5 @@
 import React, { useContext, useRef } from 'react';
 import MainContext from "../context/MainContext";
-import { useNavigate } from "react-router-dom";
 
 import SexRadio from './Radio';
 import "react-widgets/styles.css";

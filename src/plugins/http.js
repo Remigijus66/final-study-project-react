@@ -17,11 +17,6 @@ export const post = async (url, data) => {
   return await res.json()
 }
 
-// export const addMessageCount = async (name) => {
-//   console.log('adding message count to ', name)
-//   const res = await post('addMessageCounter', { name: name })
-//   console.log(res)
-// }
 
 
 

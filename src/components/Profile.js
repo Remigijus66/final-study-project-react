@@ -1,9 +1,9 @@
-import { setMaxListeners } from 'events';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+
+import React, { useContext, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MainContext from "../context/MainContext";
 
-import { checksesssion, post, timeDistance } from "../plugins/http";
+import { post } from "../plugins/http";
 import Filters from './Filters';
 
 
@@ -11,28 +11,18 @@ import Filters from './Filters';
 
 const Profile = () => {
 
-
-  // const [image, setImage] = useState('first')
   const imageRef = useRef()
-  // const imagetwoRef = useRef()
-  // const sexRef = useRef()
-  // const ageRef = useRef()
-  // const hairRef = useRef()
   const nav = useNavigate()
-  const { sessionUser, userImages, userImage, setuserImages, setSessionUser, filter, imgI, setImgI, setList, setListIndex, setNobodyAvailable } = useContext(MainContext)
+  const { sessionUser, userImages, userImage, setuserImages, filter, imgI, setImgI, setList, setListIndex, setNobodyAvailable } = useContext(MainContext)
 
 
   const updateProfile = async () => {
     const data = {
-      // name: sessionUser.name,
       image: imageRef.current.value,
-      // imagetwo: imagetwoRef.current.value,
     }
     const res = await post('updateprofile', data)
     if (res.error === true) return nav('/login')
-    // setSessionUser(res.data)
     setuserImages(res.data.images)
-    // setuserImageTwo(res.data.imagetwo)
     console.log(res)
     imageRef.current.value = ''
 
@@ -46,7 +36,7 @@ const Profile = () => {
       maxAge: filter.maxAge,
       name: sessionUser.name,
     }
-    // console.log(data)
+
     const res = await post('getList', data)
     if (res.error === true) return nav('/')
     console.log('getList res', res.data)
@@ -71,7 +61,6 @@ const Profile = () => {
 
   return (
     <div>
-
 
       <div className=' d-flex f-wrap  a-center'>
 

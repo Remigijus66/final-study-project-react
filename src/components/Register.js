@@ -1,6 +1,4 @@
 import React, { useContext, useState, useRef } from 'react';
-
-
 import MainContext from "../context/MainContext";
 import { useNavigate } from "react-router-dom";
 import { post } from "../plugins/http";
@@ -15,9 +13,7 @@ const Register = () => {
   const [errorMessage, setErrorMessage] = useState('')
   const [successMessage, setSuccessMessage] = useState('')
 
-  const { setSessionUser, setuserImage, socket, sessionUser, verifyResult, setVerifyResult, city, setCity, sex, SetSex } = useContext(MainContext)
-
-
+  const { setSessionUser, verifyResult, setVerifyResult, city, setCity, sex, SetSex } = useContext(MainContext)
 
   const registerNameRef = useRef()
   const passOneRef = useRef()
@@ -28,14 +24,12 @@ const Register = () => {
   const cities = ['Vilnius', 'Kaunas', 'Klaipėda', 'Šiauliai', 'Panevėžys', 'Alytus', 'Marijampolė', 'Mažeikiai', 'Jonava', 'Utena', 'Kėdainiai', 'Tauragė', 'Telšiai', 'Ukmergė'
   ]
 
-
   const registerUser = async () => {
     setErrorMessage('')
-    // setSuccessMessage('')
-    console.log(registerNameRef.current.value)
-    console.log(passOneRef.current.value)
-    console.log(passTwoRef.current.value)
-    console.log(ageRef.current.value)
+    // console.log(registerNameRef.current.value)
+    // console.log(passOneRef.current.value)
+    // console.log(passTwoRef.current.value)
+    // console.log(ageRef.current.value)
     const data = {
       name: registerNameRef.current.value,
       passOne: passOneRef.current.value,
@@ -65,7 +59,6 @@ const Register = () => {
         nav('/login')
         clearTimeout();
       }, 2000)
-      // setSuccessMessage('')
     }
 
   }
