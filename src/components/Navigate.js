@@ -7,7 +7,7 @@ import { post } from "../plugins/http";
 
 
 const Nav = () => {
-  const { sessionUser, setSessionUser, userImage, setuserImage, socket } = useContext(MainContext)
+  const { sessionUser, setSessionUser, userImage, setuserImage, socket, newMessages } = useContext(MainContext)
   const nav = useNavigate()
   const gearIcon = <FontAwesomeIcon icon={faGear} />
 
@@ -19,7 +19,7 @@ const Nav = () => {
       setSessionUser({});
       localStorage.setItem('secret', '')
 
-      setuserImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFUUgRMfIreBNH7C7UXCnE7Uk_vm_PR0jEgaAQxCGbNBD0rojxzh6QggsPF9Jk9v_ozYM&usqp=CAU")
+      setuserImage("https://t4.ftcdn.net/jpg/03/59/58/91/360_F_359589186_JDLl8dIWoBNf1iqEkHxhUeeOulx0wOC5.jpg")
     }
     socket.emit('logout', sessionUser.name)
     nav('/login')
@@ -32,6 +32,7 @@ const Nav = () => {
       <div className='navline d-flex a-center' >
         <div className='grow1'>
           <button onClick={() => { nav('/likes') }}> My likes</button>
+          {newMessages && <h5 style={{ color: 'red' }}>You have message form -  {newMessages}</h5>}
 
         </div>
 

@@ -21,7 +21,7 @@ const Register = () => {
   const ageRef = useRef()
 
 
-  const cities = ['Vilnius', 'Kaunas', 'Klaipėda', 'Šiauliai', 'Panevėžys', 'Alytus', 'Marijampolė', 'Mažeikiai', 'Jonava', 'Utena', 'Kėdainiai', 'Tauragė', 'Telšiai', 'Ukmergė'
+  const cities = ['Vilnius', 'Kaunas', 'Klaipėda', 'Šiauliai', 'Raseiniai', 'Panevėžys', 'Alytus', 'Marijampolė', 'Mažeikiai', 'Jonava', 'Utena', 'Kėdainiai', 'Tauragė', 'Telšiai', 'Ukmergė'
   ]
 
   const registerUser = async () => {

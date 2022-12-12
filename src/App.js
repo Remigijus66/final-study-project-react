@@ -23,7 +23,7 @@ function App() {
     const [nobodyAvailable, setNobodyAvailable] = useState(false);
     const [sessionUser, setSessionUser] = useState({})
     const [userImages, setuserImages] = useState([])
-    const [imgI, setImgI] = useState(0)
+    // const [imgI, setImgI] = useState(0)
     const [userImage, setuserImage] = useState("https://t4.ftcdn.net/jpg/03/59/58/91/360_F_359589186_JDLl8dIWoBNf1iqEkHxhUeeOulx0wOC5.jpg")
     const [filter, setFilter] = useState({})
     const [list, setList,] = useState([])
@@ -31,6 +31,12 @@ function App() {
     const [onesWholikedMe, setOnesWhoLikedMe] = useState([])
     const [onesWhoILiked, setOnesWhoILiked] = useState([])
     const [onlineUsers, setOnlineUsers,] = useState([])
+    const [showMessage, setShowMessage] = useState(false)
+    const [messageTo, setMessageTo] = useState('')
+    const [chatMessages, setChatMessages] = useState([])
+    const [reloadMessages, setReloadMessages] = useState(false)
+    const [newMessages, setNewMessages,] = useState('')
+
 
 
     const likedMe = async (name) => {
@@ -60,7 +66,7 @@ function App() {
         sessionUser, setSessionUser,
         userImage, setuserImage,
         userImages, setuserImages,
-        imgI, setImgI,
+        // imgI, setImgI,
         sex, SetSex,
         verifyResult, setVerifyResult,
         filter, setFilter,
@@ -71,7 +77,11 @@ function App() {
         onesWhoILiked, setOnesWhoILiked,
         iLiked, likedMe,
         onlineUsers, setOnlineUsers,
-
+        showMessage, setShowMessage,
+        messageTo, setMessageTo,
+        chatMessages, setChatMessages,
+        reloadMessages, setReloadMessages,
+        newMessages, setNewMessages,
     }
 
     useEffect(() => {
@@ -88,6 +98,22 @@ function App() {
             likedMe(data.to)
             // prompt('You have got like from ', data)
         })
+
+        socket.on('messageSent', (data) => {
+
+            console.log('message socket ', data)
+            setReloadMessages(true)
+
+        })
+        socket.on('messageReceived', (data) => {
+
+            console.log('message socket ', data)
+            setNewMessages(data)
+
+        })
+
+
+
 
     }, [])
 

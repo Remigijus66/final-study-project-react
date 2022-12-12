@@ -1,5 +1,6 @@
 
 import React, { useContext, useRef } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MainContext from "../context/MainContext";
 
@@ -10,10 +11,10 @@ import Filters from './Filters';
 
 
 const Profile = () => {
-
+  const [imgI, setImgI] = useState(0)
   const imageRef = useRef()
   const nav = useNavigate()
-  const { sessionUser, userImages, userImage, setuserImages, filter, imgI, setImgI, setList, setListIndex, setNobodyAvailable } = useContext(MainContext)
+  const { sessionUser, userImages, userImage, setuserImages, filter, setList, setListIndex, setNobodyAvailable } = useContext(MainContext)
 
 
   const updateProfile = async () => {
@@ -27,6 +28,20 @@ const Profile = () => {
     imageRef.current.value = ''
 
   }
+
+  const deletePhoto = async () => {
+    console.log('indeksas', imgI)
+    console.log('useris', sessionUser.name)
+    const data = {
+      index: imgI
+    }
+    const res = await post('deletePhoto', data)
+    if (res.error === true) return nav('/login')
+    setuserImages(res.data.images)
+    console.log(res)
+  }
+
+
   const getList = async () => {
     setListIndex(0)
     const data = {
@@ -77,11 +92,14 @@ const Profile = () => {
 
         </div>
         <div className='profile-card d-flex f-wrap f-column a-center ' >
-          <h5>Add photo:</h5>
+          <h5>Add/Delete photo:</h5>
 
           <input className='m10' type={'text'} ref={imageRef} placeholder={'Enter your photo'} />
 
-          <button onClick={updateProfile}>Add</button>
+          <button style={{ width: '170px' }} onClick={updateProfile}>Add</button>
+          <button style={{ width: '170px' }} onClick={deletePhoto}>Delete current photo</button>
+
+          <div className='h-dash'></div>
 
           <div>
             <Filters />

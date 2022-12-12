@@ -10,11 +10,26 @@
 // OK     registered user password, should be hashed
 // OK     Validation errors should be shown in front end if something wrong
 
+// registruojantis patikrinimas del: Vardo unikalumo; Vardo buvimo; Slaptazodziu sutapimo; Slaptazodzio ilgo (4-20) ir zenklu (skaiciai); Privaloma uzpildyti Lyti amziu miesta. Parodyti kiekviena ivedant klaidingai po to teisingai. 
+
+
 // LOGIN
 // OK     user logins with his credentials - username and password
 // OK     if credentials is bad, user should see error
 // OK     when user logs in he should be automatically navigated to own profile page
 // OK     in login page should be autologin checkbox (stay logged in)
+
+Logino metu tikrina User ir pass. Pirmo logino metu ivesti bloga paskui gera name ir po to pass. pasakyti kad passwordas hashinta. 
+
+Prisiregistravus (pvz Rasa is Raseiniu) ivesti nuotraukas po dvieju pasirodo galimybe ieskotis naudotis programa. Ivesti tris ir parodyti karusele. Pademonstruoti, kad tuscios nuotraukos neprisideda 
+
+Parodyti autologina. 
+Pirmiausiai loginantis su varnele (tada ivesti nuotraukas)
+Tada logoutintis ir isiloginti be varneles
+Tada isiloginti su varnele ir pademonstuoti kad prisijungia automatiskai. 
+
+Autologinas veikia su secret, visa kita su sesija. 
+
 
 // PROFILE
 // OK     own profile page where user have his default blank picture, and can upload more photos
@@ -25,10 +40,18 @@
 // OK     user checks which city, what gender and how old should be people shown to him
 // OK     (it can also be as a component i swipe page)
 
+uzduoti paieska is profile, o tada patikslinti pieska is swipe puslapio, parodant kad filtruoja pagal kriterijus. 
+
+
 // LIKE/DISLIKE PAGE
 // OK     page where user see other users profiles, one by one
 // OK     he can mark other user profile as liked, or disliked
 // OK     later user will be able to see profiles he liked
+
+
+palaikinti dali pasiulytu zmoniu ir padaryti paieska dar karta ir pamatyti kad nebera palaikintu
+
+
 
 // LIKES HISTORY PAGE
 // OK     in this page, user can see profiles who hi liked
@@ -36,4 +59,18 @@
 // OK     likes from other users should appear instantly if you are logged in (socket.io)
 
 
-// IF THERE IS TIME LEFT ADD POSSIBILITY TO PRIVATE MESSAGE
+
+persijungti i my likes ir pamatyti kad jie yra ten
+
+Isijungti is kitos narsykles ir susirasti pamatyti kad ji palaikino naujas zmogus, surasti ta zmogu per paieska ir palaikinti 
+parodyti, kad atsiranda gyvai. 
+
+
+// OK     IF THERE IS TIME LEFT ADD POSSIBILITY TO PRIVATE MESSAGE
+
+
+Tuomet isijungti trecia narsykle isijungti palikintiu asmeniu ir is naujo zmogaus parasyti jam zinute
+pademonstruoti, kad virsuje rodomas pranesimas apie gauta zinute 
+pademonstruoti kad kiti nemato sio susirasinejimo 
+pademonstruoti kad yra online indikatorius 
+parasyti zinute atgal ir pademonstruoti kad kad viskas Live. 

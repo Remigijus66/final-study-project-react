@@ -13,7 +13,7 @@ const Filters = () => {
   const minAgeRef = useRef()
   const maxAgeRef = useRef()
 
-  const cities = ['Vilnius', 'Kaunas', 'Klaipėda', 'Šiauliai', 'Panevėžys', 'Alytus', 'Marijampolė', 'Mažeikiai', 'Jonava', 'Utena', 'Kėdainiai', 'Tauragė', 'Telšiai', 'Ukmergė'
+  const cities = ['Vilnius', 'Kaunas', 'Klaipėda', 'Šiauliai', 'Raseiniai', 'Panevėžys', 'Alytus', 'Marijampolė', 'Mažeikiai', 'Jonava', 'Utena', 'Kėdainiai', 'Tauragė', 'Telšiai', 'Ukmergė'
   ]
 
 

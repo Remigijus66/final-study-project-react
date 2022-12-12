@@ -7,9 +7,9 @@ import { post } from "../plugins/http";
 const Login = () => {
   const nav = useNavigate()
   const [error, setError] = useState('')
-  const [keepMeLogged, setKeepMeLogged] = useState(false)
+  const [keepMeLogged, setKeepMeLogged] = useState(true)
 
-  const { setSessionUser, setuserImages, setuserImage, socket } = useContext(MainContext)
+  const { sessionUser, setSessionUser, setuserImages, setuserImage, socket } = useContext(MainContext)
 
 
   const loginNameRef = useRef()
@@ -32,6 +32,8 @@ const Login = () => {
     if (res.error === false) {
       socket.emit('login', res.data.name)
       setSessionUser(res.data)
+      // console.log('res.data', res.data)
+      // console.log('sessionUser', sessionUser)
       setuserImages(res.data.images)
       if (res.data.images.length > 0) setuserImage(res.data.images[0])
       nav('/profile')
@@ -53,9 +55,11 @@ const Login = () => {
     console.log(res)
     if (res.error === false) {
       socket.emit('login', res.data.name)
-      localStorage.setItem('secret', res.data.secret)
+      if (keepMeLogged === true) { localStorage.setItem('secret', res.data.secret) }
       setSessionUser(res.data)
       setuserImages(res.data.images)
+      // console.log('res.data', res.data)
+      // console.log('sessionUser', sessionUser)
       if (res.data.images.length > 0) setuserImage(res.data.images[0])
       nav('/profile')
       if (localStorage.getItem('keepMeLogged') === true) { console.log('write.secret') }
@@ -66,15 +70,16 @@ const Login = () => {
 
   }
 
-  const logoutUser = () => {
-    localStorage.setItem('keepMeLogged', false)
-    localStorage.setItem('token', '')
+  // const logoutUser = () => {
+  //   localStorage.setItem('keepMeLogged', false)
+  //   localStorage.setItem('token', '')
 
-  }
+  // }
 
   const handleChange = () => {
     setKeepMeLogged(!keepMeLogged);
     localStorage.setItem('keepMeLogged', !keepMeLogged)
+
     console.log('keepMeLogged', !keepMeLogged)
   }
 
@@ -89,7 +94,7 @@ const Login = () => {
         <input type={'text'} ref={loginNameRef} placeholder={'Enter username'} />
         <input type={"password"} ref={loginPassRef} placeholder={'Enter password'} />
         <button onClick={loginUser}>Login </button>
-        <button onClick={logoutUser}>Logout </button>
+        {/* <button onClick={logoutUser}>Logout </button> */}
       </div>
       <label>
 

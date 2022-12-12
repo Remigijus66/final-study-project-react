@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
 import MainContext from "../context/MainContext";
 
-const LikesCard = ({ name, age, city, images }) => {
+const LikesCard = ({ name, age, city, images, }) => {
   const [imgI, setImgI] = useState(0)
 
-  const { userImage } = useContext(MainContext)
+  const { userImage, sessionUser, setMessageTo, setShowMessage } = useContext(MainContext)
 
 
   const changeImage = () => {
@@ -15,6 +15,12 @@ const LikesCard = ({ name, age, city, images }) => {
       setImgI(0)
     }
   }
+  const chat = () => {
+    console.log(sessionUser.name, 'sending message to', name)
+    setShowMessage(true)
+    setMessageTo(name)
+  }
+
 
   return (
 
@@ -26,7 +32,7 @@ const LikesCard = ({ name, age, city, images }) => {
 
       </div>
       <button onClick={changeImage}> {'<-->'} </button>
-      <button onClick={() => prompt('Chat is under construction')}>Chat</button>
+      <button style={{ width: '200px' }} onClick={chat}> Chat</button>
 
     </div>
 

@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MainContext from "../context/MainContext";
 import { post } from '../plugins/http';
 
 const Card = ({ name, age, city, images, id }) => {
 
+  const [imgI, setImgI] = useState(0)
   const nav = useNavigate()
-  const { socket, sessionUser, userImage, imgI, setImgI, list, listIndex, setListIndex, setNobodyAvailable } = useContext(MainContext)
+  const { socket, sessionUser, userImage, list, listIndex, setListIndex, setNobodyAvailable } = useContext(MainContext)
 
 
   const changeImage = () => {
