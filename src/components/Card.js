@@ -7,7 +7,7 @@ const Card = ({ name, age, city, images, id }) => {
 
   const [imgI, setImgI] = useState(0)
   const nav = useNavigate()
-  const { socket, sessionUser, userImage, list, listIndex, setListIndex, setNobodyAvailable } = useContext(MainContext)
+  const { socket, sessionUser, userImage, list, setList, listIndex, setListIndex, setNobodyAvailable } = useContext(MainContext)
 
 
   const changeImage = () => {
@@ -23,10 +23,15 @@ const Card = ({ name, age, city, images, id }) => {
       setListIndex(listIndex + 1)
     } else {
       setListIndex(0)
-      setNobodyAvailable(true)
+      // setNobodyAvailable(true)
     }
   }
   const like = async () => {
+    const listCopy = list
+    listCopy.splice(listIndex, 1)
+    if (listCopy.length === 0) setNobodyAvailable(true)
+    setList(listCopy)
+
     console.log('like')
     console.log('sessionUser ===', sessionUser.name);
     console.log('id ===', name);
