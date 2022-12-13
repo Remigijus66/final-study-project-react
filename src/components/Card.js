@@ -19,22 +19,32 @@ const Card = ({ name, age, city, images, id }) => {
     }
   }
   const next = () => {
+
+    // console.log('next list', list)
+    // console.log('next index before', listIndex)
     if (listIndex < list.length - 1) {
       setListIndex(listIndex + 1)
     } else {
       setListIndex(0)
       // setNobodyAvailable(true)
     }
+    // console.log('next index after', listIndex)
+
   }
   const like = async () => {
+
+    // console.log('list', list)
     const listCopy = list
+    // console.log('listCopy', listCopy)
+    // console.log('listindex', listIndex)
     listCopy.splice(listIndex, 1)
+    console.log('listCopy', listCopy)
     if (listCopy.length === 0) setNobodyAvailable(true)
     setList(listCopy)
 
-    console.log('like')
-    console.log('sessionUser ===', sessionUser.name);
-    console.log('id ===', name);
+    // console.log('like')
+    // console.log('sessionUser ===', sessionUser.name);
+    // console.log('id ===', name);
     const data = {
       author: sessionUser.name,
       liked: name
@@ -48,7 +58,7 @@ const Card = ({ name, age, city, images, id }) => {
         to: name
       }
       socket.emit('like', socketData)
-      console.log('socket emitted', socketData)
+      // console.log('socket emitted', socketData)
       next()
     }
   }

@@ -7,7 +7,7 @@ import { post } from "../plugins/http";
 
 
 const Nav = () => {
-  const { sessionUser, setSessionUser, userImage, setuserImage, socket, newMessages } = useContext(MainContext)
+  const { sessionUser, setSessionUser, userImage, setuserImage, socket, newMessages, newLikes } = useContext(MainContext)
   const nav = useNavigate()
   const gearIcon = <FontAwesomeIcon icon={faGear} />
 
@@ -33,6 +33,7 @@ const Nav = () => {
         <div className='grow1'>
           <button onClick={() => { nav('/likes') }}> My likes</button>
           {newMessages && <h5 style={{ color: 'red' }}>You have message form -  {newMessages}</h5>}
+          {newLikes && <h5 style={{ color: 'red' }}>You have like from -  {newLikes}</h5>}
 
         </div>
 

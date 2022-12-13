@@ -36,12 +36,12 @@ function App() {
     const [chatMessages, setChatMessages] = useState([])
     const [reloadMessages, setReloadMessages] = useState(false)
     const [newMessages, setNewMessages,] = useState('')
+    const [newLikes, setNewLikes,] = useState('')
 
 
 
     const likedMe = async (name) => {
         const data = {
-            // name: sessionUser.name
             name: name
         }
         console.log('looking for my likers', data)
@@ -49,10 +49,11 @@ function App() {
         if (res.error === true) return prompt('please login')
         setOnesWhoLikedMe(res.data)
     }
-    const iLiked = async () => {
+    const iLiked = async (name) => {
         const data = {
-            name: sessionUser.name
+            name: name
         }
+        console.log('looking for my liked', data)
         const res = await post('iLiked', data)
         if (res.error === true) return prompt('please login')
         setOnesWhoILiked(res.data)
@@ -66,7 +67,6 @@ function App() {
         sessionUser, setSessionUser,
         userImage, setuserImage,
         userImages, setuserImages,
-        // imgI, setImgI,
         sex, SetSex,
         verifyResult, setVerifyResult,
         filter, setFilter,
@@ -82,6 +82,7 @@ function App() {
         chatMessages, setChatMessages,
         reloadMessages, setReloadMessages,
         newMessages, setNewMessages,
+        newLikes, setNewLikes,
     }
 
     useEffect(() => {
@@ -97,6 +98,20 @@ function App() {
             console.log('like socket to', data.to)
             likedMe(data.to)
             // prompt('You have got like from ', data)
+            setNewLikes(data.from)
+
+        })
+
+        socket.on('iWasDisliked', (data) => {
+            console.log('iWasDisliked', data)
+            likedMe(data)
+        })
+
+        socket.on('iDisliked', (data) => {
+            console.log('iDisliked', data)
+
+            iLiked(data)
+
         })
 
         socket.on('messageSent', (data) => {
